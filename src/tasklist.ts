@@ -35,13 +35,15 @@ class TaskList {
      res.redirect("/");
    }
   
-   async completeTask(req:any, res:any) {
-     const completedTasks = Object.keys(req.body);
-     const tasks = new Array();
-  
-     completedTasks.forEach(task => {
-       tasks.push(this.taskDao.updateItem(task));
-     });
+   async updateTask(req:any, res:any) {
+     //const completedTasks = Object.keys(req.body);
+     //const tasks = new Array();
+     const item = req.payload;
+     this.taskDao.updateItem(item);
+
+     //completedTasks.forEach(task => {
+     //  tasks.push(this.taskDao.updateItem(task));
+     //});
   
      //await Promise.all(tasks);
        res.redirect("/");

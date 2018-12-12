@@ -52,7 +52,9 @@ server.route({
     method: 'POST',
     path: '/updatetask',
     handler: (request, h) => {
-        taskList.completeTask(request,h);
+        var data;
+        data = taskList.updateTask(request,h);
+        return h.response('updated').code(201);
         //return 'Hello, ' + encodeURIComponent(request.params.name) + '!';
     }
 });
@@ -61,7 +63,7 @@ server.route({
     method: 'POST',
     path: '/deletetask',
     handler: (request, h) => {
-        taskList.completeTask(request,h);
+        taskList.updateTask(request,h);
         //return 'Hello, ' + encodeURIComponent(request.params.name) + '!';
     }
 });

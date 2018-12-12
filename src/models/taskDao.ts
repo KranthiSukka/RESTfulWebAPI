@@ -60,19 +60,31 @@ class TaskDao {
    return doc;
  }
 
- async updateItem(itemId:any) {
+ async updateItem(item:any) {
    //debug("Update an item in the database");
-   const doc = await this.getItem(itemId);
-   doc.completed = true;
+   const doc = await this.getItem(item.member_id);
+   //doc.completed = true;
+   doc.name = item.name;
 
-   const { body: replaced } = await this.container.item(itemId).replace(doc);
+
+   const { body: replaced } = await this.container.item(doc.id).replace(doc);
    return replaced;
  }
 
- async getItem(itemId:any) {
+ async getItem(member_id:string) {
    //debug("Getting an item from the database");
-   const { body } = await this.container.item(itemId).read();
-   return body;
+   //const { body } = await this.container.item(member_id).read();
+   const querySpec = {
+    query: "SELECT * FROM ToDoList c where c.member_id = @member_id",
+    parameters: [
+        {
+          name: "member_id",
+          value: member_id
+        }
+    ]
+  };
+  const { result: results } = await this.container.items.query(querySpec).toArray();
+  return results[0];
  }
 }
 
