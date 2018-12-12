@@ -39,7 +39,11 @@ server.route({
     method: 'POST',
     path: '/addtask',
     handler: (request, h) => {
-        taskList.addTask(request,h);
+        var data;
+        data = taskList.addTask(request,h);
+        //return h.response(data).code(200);
+        //return "";
+        return h.response('created').code(201)
         //return 'Hello, ' + encodeURIComponent(request.params.name) + '!';
     }
 });
