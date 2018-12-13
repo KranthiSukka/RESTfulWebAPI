@@ -71,6 +71,12 @@ class TaskDao {
    return replaced;
  }
 
+ async deleteItem(item:any){
+   const doc = await this.getItem(item.member_id);
+   const{body:replaced} = await this.container.item(doc.id).delete(doc);
+   return true;
+ }
+
  async getItem(member_id:string) {
    //debug("Getting an item from the database");
    //const { body } = await this.container.item(member_id).read();
@@ -78,7 +84,7 @@ class TaskDao {
     query: "SELECT * FROM ToDoList c where c.member_id = @member_id",
     parameters: [
         {
-          name: "member_id",
+          name: "@member_id",
           value: member_id
         }
     ]

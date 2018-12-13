@@ -1,4 +1,5 @@
 import * as TaskDao from "./models/taskDao"
+import { any } from "joi";
 
 class TaskList {
     /**
@@ -48,7 +49,12 @@ class TaskList {
      //await Promise.all(tasks);
        res.redirect("/");
    }
-  }
   
+
+  async deleteTask(req:any,res:any) {
+      const item = req.payload;
+      this.taskDao.deleteItem(item);
+  }
+}
   export {TaskList};
   //module.exports = TaskList;
