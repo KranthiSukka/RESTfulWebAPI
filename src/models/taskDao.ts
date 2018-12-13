@@ -65,6 +65,7 @@ class TaskDao {
    const doc = await this.getItem(item.member_id);
    //doc.completed = true;
    doc.name = item.name;
+   doc.completed = true;
 
 
    const { body: replaced } = await this.container.item(doc.id).replace(doc);

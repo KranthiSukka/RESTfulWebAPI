@@ -12,20 +12,17 @@ class TaskList {
    }
    async showTasks(req:any, res:any) {
      const querySpec = {
-       query: "SELECT * FROM root r WHERE r.completed=@completed",
+       query: "SELECT * FROM ToDoList r WHERE r.completed=@completed",
        parameters: [
          {
            name: "@completed",
-           value: false
+           value: true
          }
        ]
      };
   
      const items = this.taskDao.find(querySpec);
-     res.render("index", {
-       title: "My ToDo List ",
-       tasks: items
-     });
+     return items;
    }
   
    async addTask(req:any, res:any) {

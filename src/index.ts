@@ -30,7 +30,9 @@ server.route({
     method: 'GET',
     path: '/',
     handler: (request, h) => {
-        taskList.showTasks(request,h);
+        var data;
+        data = taskList.showTasks(request,h);
+        return data;
         //return 'Hello, world!';
     }
 });
